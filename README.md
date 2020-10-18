@@ -28,3 +28,12 @@ psql -U master -h <proxy endpoint>
 ```
 
 If you find yourself in the postgres shell, everything has worked out.
+
+To deploy the `LambdaStack` we first need to build the Go binary inside the `lambda` directory:
+
+```shell
+cd lambda
+GOOS=linux GOARCH=amd64 go build main.go
+zip build.zip main
+rm main
+```
