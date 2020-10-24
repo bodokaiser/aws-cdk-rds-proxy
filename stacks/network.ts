@@ -1,5 +1,5 @@
 import { Construct, Stack, StackProps } from '@aws-cdk/core'
-import { Vpc, SubnetType } from '@aws-cdk/aws-ec2'
+import { Vpc, SubnetType, InterfaceVpcEndpointAwsService } from '@aws-cdk/aws-ec2'
 
 export class NetworkStack extends Stack {
   public vpc: Vpc
@@ -22,6 +22,9 @@ export class NetworkStack extends Stack {
           subnetType: SubnetType.ISOLATED,
         },
       ],
+    })
+    this.vpc.addInterfaceEndpoint('SecretsManagerEndpoint', {
+      service: InterfaceVpcEndpointAwsService.SECRETS_MANAGER,
     })
   }
 }

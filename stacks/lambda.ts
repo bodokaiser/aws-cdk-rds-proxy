@@ -31,7 +31,9 @@ export class LambdaStack extends Stack {
       code: Code.fromAsset(path.join(__dirname, '../lambda/build.zip')),
       environment: {
         POSTGRES_SECRET_ARN: props.postgresSecret.secretArn,
-        POSTGRES_ENDPOINT: props.postgresEndpoint,
+        PGHOST: props.postgresEndpoint,
+        PGSSLMODE: 'verify-ca',
+        PGDATABASE: 'postgres',
       },
       vpc: props.vpc,
       vpcSubnets: {

@@ -13,10 +13,7 @@ import (
 	"github.com/jackc/pgx/v4"
 )
 
-var (
-	postgresSecretARN = os.Getenv("POSTGRES_SECRET_ARN")
-	postgresEndpoint  = os.Getenv("POSTGRES_ENDPOINT")
-)
+var postgresSecretARN = os.Getenv("POSTGRES_SECRET_ARN")
 
 func main() {
 	fmt.Println("started")
@@ -27,7 +24,6 @@ func main() {
 	fmt.Printf("retrieved secret: %+v\n", secret)
 
 	conf, _ := pgx.ParseConfig("")
-	conf.Host = postgresEndpoint
 	conf.User = secret.Username
 	conf.Password = secret.Password
 	fmt.Printf("configured config: %+v\n", conf)
